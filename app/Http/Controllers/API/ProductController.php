@@ -11,8 +11,15 @@ use Carbon\Carbon;
 class ProductController extends Controller
 {
     public function get(){
-        try { 
+       /*  try { 
             $data = Product::get();
+            return response()->json($data, 200);
+        } catch (\Throwable $th) {
+            return response()->json([ 'error' => $th->getMessage()], 500);
+        } */
+        try { 
+            // Incluir la relación con la categoría al recuperar los datos
+            $data = Product::with('category')->get();
             return response()->json($data, 200);
         } catch (\Throwable $th) {
             return response()->json([ 'error' => $th->getMessage()], 500);
